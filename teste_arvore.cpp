@@ -9,7 +9,7 @@ int main()
 	novo.descr = "cimento";
 	novo.custo = 1000.00;
 	
-	TipoPagina *arvore;
+	TipoApontador arvore;
 	
 	Inicializa(&arvore);
 
