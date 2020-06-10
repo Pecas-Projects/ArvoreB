@@ -13,15 +13,14 @@ typedef long TipoChave;
 
 typedef struct TipoRegistro {
 	TipoChave Chave; //cahve == cod
-	string descr;
-	double custo;
-	
+	double custo; 
+	char descricao[20];
 } TipoRegistro;
 
 typedef struct TipoPagina* TipoApontador;
 typedef struct TipoPagina {
 	short n;
-	TipoRegistro r[MM];
+	TipoRegistro r[M];
 	TipoApontador p[MM + 1];
 } TipoPagina;
 
@@ -246,9 +245,12 @@ void Retira(TipoChave Ch, TipoApontador *Ap){
 void ImprimeI(TipoApontador p, int nivel){ 
 	long i;
 	if (p == NULL) return;
-	printf("Nivel %d : ", nivel);
-	for (i = 0; i < p->n; i++)
-		printf("%ld ",(long)p->r[i].Chave);
+	printf("Nivel %d : \n", nivel);
+	for (i = 0; i < p->n; i++){
+		printf("Chave: %ld\n",(long)p->r[i].Chave);
+		printf("Custo: %lf\n",(double) p->r[i].custo);
+		printf ("Descricao: %c\n", p->r[i].descricao[0]);
+	}
 	putchar('\n');
 	nivel++;
 	for (i = 0; i <= p->n; i++)
