@@ -1,15 +1,21 @@
-#include<stdlib.h>
-#include<stdio.h>
-#define M 2
-#define MM  (M * 2)
+#include <stdlib.h>
+#include <stdio.h>
+#include <iostream>
+#define M 2 //(n/2)
+#define MM  (M + 1)//ordem quatro(n), tem três filhos (n-1)
 
 #define FALSE 0
 #define TRUE  1
 
+using namespace std;
+
 typedef long TipoChave;
 
 typedef struct TipoRegistro {
-	TipoChave Chave;
+	TipoChave Chave; //cahve == cod
+	string descr;
+	double custo;
+	
 } TipoRegistro;
 
 typedef struct TipoPagina* TipoApontador;
