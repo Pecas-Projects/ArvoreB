@@ -5,6 +5,7 @@ using namespace std;
 
 int main()
 {
+	setlocale(LC_ALL, "Portuguese");
 	TipoPagina *arvore;
 	Inicializa(&arvore);
 	char comando;
@@ -17,7 +18,8 @@ int main()
 	while(fgets(linha, sizeof(linha), arq) != NULL)
 	{		
 		//verificações
-
+		
+		memset(palavra, 0, sizeof(palavra));
 		if(strstr(linha, "Cod"))  //se encontrar a tag do Codigo na linha
 		{
 			inserePalavra(linha, palavra);
@@ -41,7 +43,7 @@ int main()
 	} 
 	
 	while (1){
-		
+		//system("cls");
 		printf("Digite:\n");
 		printf("	[P] Pesquisar\n");
 		printf("	[E] Exibir\n");
@@ -51,27 +53,31 @@ int main()
 		scanf("%c", &comando);
 		
 		
-		if(comando == 'P'){
+		if(comando == 'P' || comando == 'p'){
 			int cod;
 			TipoChave o;
-			printf("Digite o codigo que deseja pesquisar: ");
+			printf("Digite o código que deseja pesquisar: ");
 			scanf("%d", &cod);
 			o= cod;				
 			Pesquisa(o, arvore);
 			
-		}else if (comando == 'E'){
+		}else if (comando == 'E' || comando == 'e'){
 			Imprime(arvore);
 					
-		}else if (comando == 'T'){
+		}else if (comando == 'T' || comando == 't'){
 			total =0;
 			Soma(arvore);
-			printf("O Custo total da obra foi: %lf\n", total);
+			printf("O Custo total da obra foi: %.2lf\n", total);
 			
-		}else if (comando == 'S'){
+		}else if (comando == 'S' || comando == 's'){
+			printf("Saindo...\n");
 			break;
-		}		
+		}	
+		else{
+			printf("Opção inválida! Tente novamente!!!\n");
+		}	
 	}
 	
-	
+	fechaArq(&arq);
 	return 0;
 }

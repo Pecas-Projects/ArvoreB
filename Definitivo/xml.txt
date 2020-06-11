@@ -7,7 +7,7 @@
            </Entrega>
            <Entrega>
          <Cod>7</Cod> 
-  <Descr>Escavação</Descr>
+  <Descr>Escavacao</Descr>
   <Custo>20000,00</Custo>
            </Entrega>
            <Entrega>

@@ -7,7 +7,7 @@ using namespace std;
 int main(){
 	setlocale(LC_ALL, "Portuguese");
 	char linha[50], palavra[20];
-	estrutura entrega;
+	TipoRegistro entrega;
 	FILE* arq;
 	abreArq(&arq);
 	limpaStruct(&entrega);
@@ -22,7 +22,7 @@ int main(){
 		if(strstr(linha, "Cod"))  //se encontrar a tag do Codigo na linha
 		{
 			inserePalavra(linha, palavra);
-			entrega.cod = atoi(palavra); //conversao para inteiro e inserção na estrutura
+			entrega.Chave = atoi(palavra); //conversao para inteiro e inserção na estrutura
 		}
 		else if(strstr(linha, "Descr"))  //se encontrar a tag do Descrição na linha
 		{
@@ -38,7 +38,7 @@ int main(){
 		if(structCompleta(entrega)){ //se a struct estiver completa
 			cout << "Custo: " << entrega.custo << endl;
 			cout << "Descricao: " << entrega.descricao << endl;
-			cout << "Código: " << entrega.cod << endl;
+			cout << "Código: " << entrega.Chave << endl;
 			//a insercao na arvore deve ser feita nesse momento
 			limpaStruct(&entrega);
 		}

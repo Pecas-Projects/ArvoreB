@@ -1,6 +1,8 @@
 #include<stdlib.h>
 #include<stdio.h>
 #include <string.h>
+#include <stdbool.h>
+#include <locale.h>
 #define M 1
 #define MM  (M + 2)
 
@@ -12,7 +14,7 @@ typedef long TipoChave;
 typedef struct TipoRegistro {
 	TipoChave Chave;
 	double custo;
-	char descricao[3];
+	char descricao[20];
 } TipoRegistro;
 
 typedef struct TipoPagina* TipoApontador;
@@ -29,7 +31,7 @@ void Inicializa(TipoApontador *Dicionario){
 void Pesquisa(TipoRegistro *x, TipoApontador Ap){ 
 	long i = 1;
 	if (Ap == NULL) { 
-		printf("TipoRegistro nao esta presente na arvore\n");
+		printf("TipoRegistro não está presente na árvore\n");
 		return;
 	}
 	while (i < Ap->n && x->Chave > Ap->r[i-1].Chave) 
@@ -48,16 +50,16 @@ void Pesquisa(TipoChave chave, TipoApontador Ap){
     TipoRegistro *x;
     long i = 1;
     if (Ap == NULL) { 
-        printf("Codigo Invalido!\n");
+        printf("Código da etapa não se encontra no sistema!\n");
         return;
     }
     while (i < Ap->n && chave > Ap->r[i-1].Chave) 
         i++;
     
     if (chave == Ap->r[i-1].Chave) {
-    	printf("O codigo digitado retornou a etapa: \n");
-    	printf("Descricao: %s\n",(char*)Ap->r[i-1].descricao);
-        printf("Custo: %lf\n",(double) Ap->r[i-1].custo);
+    	printf("O código digitado retornou a etapa: \n");
+    	printf("Descrição: %s\n",(char*)Ap->r[i-1].descricao);
+        printf("Custo: %.2lf\n",(double) Ap->r[i-1].custo);
         return;
     }
     if (chave < Ap->r[i-1].Chave) 
@@ -102,7 +104,7 @@ void Ins(TipoRegistro Reg, TipoApontador Ap, short *Cresceu,
 	while (i < Ap->n && Reg.Chave > Ap->r[i-1].Chave)  
 		i++;
   	if (Reg.Chave == Ap->r[i-1].Chave) { 
-		printf(" Erro: Registro ja esta presente\n"); *Cresceu = FALSE;
+		printf(" Erro: O registro já está presente\n"); *Cresceu = FALSE;
     	return;
   	}
   	if (Reg.Chave < Ap->r[i-1].Chave) i--;
@@ -224,7 +226,7 @@ void Ret(TipoChave Ch, TipoApontador *Ap, short *Diminuiu){
 	long j, Ind = 1;
 	TipoApontador Pag;
 	if (*Ap == NULL) { 
-		printf("Erro: registro nao esta na arvore\n"); *Diminuiu = FALSE;
+		printf("Erro: registro não está na arvore\n"); *Diminuiu = FALSE;
 		return;
 	}
   	Pag = *Ap;
@@ -267,12 +269,12 @@ void Retira(TipoChave Ch, TipoApontador *Ap){
 void ImprimeI(TipoApontador p, int nivel){ 
 	long i;
 	if (p == NULL) return;
-	printf("Nivel %d : ", nivel);
+	printf("Nível %d : ", nivel);
 	for (i = 0; i < p->n; i++){
 		printf("\n");
-		printf("Cod: %ld \n",(long)p->r[i].Chave);
-		printf("Custo: %lf \n",(double)p->r[i].custo);
-		printf("Descricao: %s \n", (char*)p->r[i].descricao);
+		printf("Código: %ld \n",(long)p->r[i].Chave);
+		printf("Custo: %.2lf \n",(double)p->r[i].custo);
+		printf("Descrição: %s \n", (char*)p->r[i].descricao);
 		printf("\n");	
 	}
 		
@@ -311,7 +313,7 @@ void abreArq(FILE** arq)
 	*arq = fopen("xml.txt", "r");
 	if(*arq == NULL)
 	{
-		printf("Nao foi possivel abrir seu arquivo!\n");
+		printf("Não foi possível abrir seu arquivo!\n");
 
 	}
 	else

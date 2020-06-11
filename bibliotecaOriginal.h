@@ -1,6 +1,8 @@
 #include<stdlib.h>
 #include<stdio.h>
 #include <string.h>
+#include <stdbool.h>
+#include <locale.h>
 #define M 1
 #define MM  (M + 2)
 
@@ -12,7 +14,7 @@ typedef long TipoChave;
 typedef struct TipoRegistro {
 	TipoChave Chave;
 	double custo;
-	char descricao[3];
+	char descricao[20];
 } TipoRegistro;
 
 typedef struct TipoPagina* TipoApontador;

@@ -1,27 +1,23 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <locale.h>
+#include "bibliotecaOriginal.h"
 
 //biblioteca para leitura de obtencao das palavras
 
-typedef struct
+/*typedef struct
 {
 	int cod;
 	double custo;
 	char descricao[20];
-} estrutura;
+} estrutura;*/
 
-void limpaStruct(estrutura *estrut)  //limpa os valores da estrutura estrutura
+void limpaStruct(TipoRegistro *estrut)  //limpa os valores da estrutura estrutura
 {
-	(*estrut).cod = 0;
+	(*estrut).Chave = 0;
 	(*estrut).custo = 0;
 	memset(estrut->descricao, 0, sizeof(char*));
 }
 
-bool structCompleta(estrutura estrut){ //retorna se a struct está completa ou não
-	if(estrut.cod != 0 && estrut.custo != 0 && strlen(estrut.descricao) != 0){
+bool structCompleta(TipoRegistro estrut){ //retorna se a struct está completa ou não
+	if(estrut.Chave != 0 && estrut.custo != 0 && strlen(estrut.descricao) != 0){
 		return true;
 	}
 	return false;
@@ -78,7 +74,7 @@ void inserePalavra(char* linha, char* palavra) //função que busca a palavra entr
 	//return palavra; 
 }
 
-void obtemPalavras(estrutura* entrega, FILE** arq)
+void obtemPalavras(TipoRegistro* entrega, FILE** arq)
 {
 	setlocale(LC_ALL, "Portuguese");
 	setbuf(stdout, NULL);	
@@ -92,7 +88,7 @@ void obtemPalavras(estrutura* entrega, FILE** arq)
 		if(strstr(linha, "Cod"))  //se encontrar a tag do Codigo na linha
 		{
 			inserePalavra(linha, palavra);
-			(*entrega).cod = atoi(palavra); //conversao para inteiro e inserção na estrutura
+			(*entrega).Chave = atoi(palavra); //conversao para inteiro e inserção na estrutura
 		}
 		else if(strstr(linha, "Descr"))  //se encontrar a tag do Descrição na linha
 		{
@@ -106,7 +102,7 @@ void obtemPalavras(estrutura* entrega, FILE** arq)
 		}
 		if(structCompleta(*entrega)){ //se a struct estiver completa
 			printf("Custo: %.2lf\n", (*entrega).custo);
-			printf("Código: %d\n", (*entrega).cod);
+			printf("Código: %d\n", (*entrega).Chave);
 			printf("Custo: %s\n", (*entrega).descricao);
 			//a insercao da arvore deve ser feita nesse momento
 			
