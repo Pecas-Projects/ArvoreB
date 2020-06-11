@@ -1,26 +1,23 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <iostream>
-#define M 1 //(n/2)
-#define MM  (M + 2)//ordem quatro(n), tem três filhos (n-1)
+#include<stdlib.h>
+#include<stdio.h>
+#define M 1
+#define MM  (M + 2)
 
 #define FALSE 0
 #define TRUE  1
 
-using namespace std;
-
 typedef long TipoChave;
 
 typedef struct TipoRegistro {
-	TipoChave Chave; //cahve == cod
-	double custo; 
-	char descricao[20];
+	TipoChave Chave;
+	double custo;
+	char descricao[2];
 } TipoRegistro;
 
 typedef struct TipoPagina* TipoApontador;
 typedef struct TipoPagina {
 	short n;
-	TipoRegistro r[M];
+	TipoRegistro r[MM];
 	TipoApontador p[MM + 1];
 } TipoPagina;
 
@@ -28,25 +25,22 @@ void Inicializa(TipoApontador *Dicionario){
 	*Dicionario = NULL; 
 }
 
-void Pesquisa(TipoChave chave, TipoApontador Ap){ 
-	TipoRegistro *x;
+void Pesquisa(TipoRegistro *x, TipoApontador Ap){ 
 	long i = 1;
 	if (Ap == NULL) { 
-		printf("Codigo Invalido!\n");
+		printf("TipoRegistro nao esta presente na arvore\n");
 		return;
 	}
-	while (i < Ap->n && chave > Ap->r[i-1].Chave) 
+	while (i < Ap->n && x->Chave > Ap->r[i-1].Chave) 
 		i++;
-	if (chave == Ap->r[i-1].Chave) {
-		cout<<"O codigo digitado retornou a etapa:" <<endl;
-		cout<<"Descricao: "<<  Ap->r[i-1].descricao <<endl;
-		printf("Custo: %lf\n",(double) Ap->r[i-1].custo);
+	if (x->Chave == Ap->r[i-1].Chave) { 
+		*x = Ap->r[i-1];
 		return;
 	}
-	if (chave < Ap->r[i-1].Chave) 
-		Pesquisa(chave, Ap->p[i-1]);
+	if (x->Chave < Ap->r[i-1].Chave) 
+		Pesquisa(x, Ap->p[i-1]);
 	else 
-		Pesquisa(chave, Ap->p[i]);
+		Pesquisa(x, Ap->p[i]);
 } 
 
 void InsereNaPagina(TipoApontador Ap, 

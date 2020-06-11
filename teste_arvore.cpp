@@ -10,15 +10,15 @@ int main()
 	
 	novo.Chave = 1;
 	novo.custo = 1000.00;
-	novo.descricao = {'o', 'i', '\n'};
+	novo.descricao[0] = 'A';
 	
 	teste1.Chave = 3;
 	teste1.custo = 4500.32;
-	teste1.descricao = {'c', 'a', 'r', 'r', 'o', '\n'};
+	teste1.descricao[0] = 'B';
 	
 	teste2.Chave = 777;
 	teste2.custo = 867.987;
-	teste2.descricao = {'f', 'o', 'm', 'e', '\n'};
+	teste2.descricao[0] = 'C';
 	
 	
 	TipoPagina *arvore;
