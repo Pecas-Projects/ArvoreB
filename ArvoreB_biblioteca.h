@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <iostream>
 #define M 2 //(n/2)
-#define MM  (M + 1)//ordem quatro(n), tem três filhos (n-1)
+#define MM  (M * 2)//ordem quatro(n), tem três filhos (n-1)
 
 #define FALSE 0
 #define TRUE  1
@@ -28,22 +28,25 @@ void Inicializa(TipoApontador *Dicionario){
 	*Dicionario = NULL; 
 }
 
-void Pesquisa(TipoRegistro *x, TipoApontador Ap){ 
+void Pesquisa(TipoChave chave, TipoApontador Ap){ 
+	TipoRegistro *x;
 	long i = 1;
 	if (Ap == NULL) { 
-		printf("TipoRegistro nao esta presente na arvore\n");
+		printf("Codigo Invalido!\n");
 		return;
 	}
-	while (i < Ap->n && x->Chave > Ap->r[i-1].Chave) 
+	while (i < Ap->n && chave > Ap->r[i-1].Chave) 
 		i++;
-	if (x->Chave == Ap->r[i-1].Chave) { 
-		*x = Ap->r[i-1];
+	if (chave == Ap->r[i-1].Chave) {
+		cout<<"O codigo digitado retornou a etapa:" <<endl;
+		cout<<"Descricao: "<<  Ap->r[i-1].descricao <<endl;
+		printf("Custo: %lf\n",(double) Ap->r[i-1].custo);
 		return;
 	}
-	if (x->Chave < Ap->r[i-1].Chave) 
-		Pesquisa(x, Ap->p[i-1]);
+	if (chave < Ap->r[i-1].Chave) 
+		Pesquisa(chave, Ap->p[i-1]);
 	else 
-		Pesquisa(x, Ap->p[i]);
+		Pesquisa(chave, Ap->p[i]);
 } 
 
 void InsereNaPagina(TipoApontador Ap, 
@@ -247,9 +250,9 @@ void ImprimeI(TipoApontador p, int nivel){
 	if (p == NULL) return;
 	printf("Nivel %d : \n", nivel);
 	for (i = 0; i < p->n; i++){
-		printf("Chave: %ld\n",(long)p->r[i].Chave);
+		printf("Codigo: %ld\n",(long)p->r[i].Chave);
 		printf("Custo: %lf\n",(double) p->r[i].custo);
-		printf ("Descricao: %c\n", p->r[i].descricao[0]);
+		cout<<"Descricao: "<<  p->r[i].descricao <<endl;
 	}
 	putchar('\n');
 	nivel++;
