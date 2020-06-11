@@ -5,7 +5,7 @@
 using namespace std;
 
 int main(){
-	//setlocale(LC_ALL, "Portuguese");
+	setlocale(LC_ALL, "Portuguese");
 	char linha[50], palavra[20];
 	estrutura entrega;
 	FILE* arq;
@@ -18,6 +18,7 @@ int main(){
 		
 		//verificações
 
+		memset(palavra, 0, sizeof(palavra));
 		if(strstr(linha, "Cod"))  //se encontrar a tag do Codigo na linha
 		{
 			inserePalavra(linha, palavra);
@@ -39,6 +40,7 @@ int main(){
 			cout << "Descricao: " << entrega.descricao << endl;
 			cout << "Código: " << entrega.cod << endl;
 			//a insercao na arvore deve ser feita nesse momento
+			limpaStruct(&entrega);
 		}
 	} 
 	obtemPalavras(&entrega, &arq);
