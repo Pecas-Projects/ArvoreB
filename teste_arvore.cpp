@@ -21,7 +21,7 @@ int main()
 	teste2.descricao = {'f', 'o', 'm', 'e', '\n'};
 	
 	
-	TipoApontador arvore;
+	TipoPagina *arvore;
 	
 	Inicializa(&arvore);
 	

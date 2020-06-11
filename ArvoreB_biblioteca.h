@@ -1,8 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
-#define M 2 //(n/2)
-#define MM  (M * 2)//ordem quatro(n), tem três filhos (n-1)
+#define M 1 //(n/2)
+#define MM  (M + 2)//ordem quatro(n), tem três filhos (n-1)
 
 #define FALSE 0
 #define TRUE  1
