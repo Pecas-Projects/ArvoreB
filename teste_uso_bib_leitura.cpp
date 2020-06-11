@@ -11,9 +11,10 @@ int main(){
 	FILE* arq;
 	abreArq(&arq);
 	limpaStruct(&entrega);
-	/*while(fgets(linha, sizeof(linha), arq) != NULL)
+	
+	while(fgets(linha, sizeof(linha), arq) != NULL)
 	{
-		cout << linha << endl;
+		//cout << linha << endl;
 		
 		//verificações
 
@@ -39,7 +40,7 @@ int main(){
 			cout << "Código: " << entrega.cod << endl;
 			//a insercao na arvore deve ser feita nesse momento
 		}
-	} */
+	} 
 	obtemPalavras(&entrega, &arq);
 	fechaArq(&arq);
 	
