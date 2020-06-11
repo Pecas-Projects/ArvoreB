@@ -1,5 +1,6 @@
 #include<stdlib.h>
 #include<stdio.h>
+#include <string.h>
 #define M 1
 #define MM  (M + 2)
 
@@ -11,7 +12,7 @@ typedef long TipoChave;
 typedef struct TipoRegistro {
 	TipoChave Chave;
 	double custo;
-	char descricao[2];
+	char descricao[3];
 } TipoRegistro;
 
 typedef struct TipoPagina* TipoApontador;
@@ -42,6 +43,30 @@ void Pesquisa(TipoRegistro *x, TipoApontador Ap){
 	else 
 		Pesquisa(x, Ap->p[i]);
 } 
+
+void Pesquisa(TipoChave chave, TipoApontador Ap){ 
+    TipoRegistro *x;
+    long i = 1;
+    if (Ap == NULL) { 
+        printf("Codigo Invalido!\n");
+        return;
+    }
+    while (i < Ap->n && chave > Ap->r[i-1].Chave) 
+        i++;
+    
+    if (chave == Ap->r[i-1].Chave) {
+    	printf("O codigo digitado retornou a etapa: \n");
+    	printf("Descricao: %s\n",(char*)Ap->r[i-1].descricao);
+        printf("Custo: %lf\n",(double) Ap->r[i-1].custo);
+        return;
+    }
+    if (chave < Ap->r[i-1].Chave) 
+        Pesquisa(chave, Ap->p[i-1]);
+    else 
+        Pesquisa(chave, Ap->p[i]);
+} 
+
+
 
 void InsereNaPagina(TipoApontador Ap, 
                     TipoRegistro Reg, 
@@ -243,8 +268,14 @@ void ImprimeI(TipoApontador p, int nivel){
 	long i;
 	if (p == NULL) return;
 	printf("Nivel %d : ", nivel);
-	for (i = 0; i < p->n; i++)
-		printf("%ld ",(long)p->r[i].Chave);
+	for (i = 0; i < p->n; i++){
+		printf("\n");
+		printf("Cod: %ld \n",(long)p->r[i].Chave);
+		printf("Custo: %lf \n",(double)p->r[i].custo);
+		printf("Descricao: %s \n", (char*)p->r[i].descricao);
+		printf("\n");	
+	}
+		
 	putchar('\n');
 	nivel++;
 	for (i = 0; i <= p->n; i++)
@@ -254,4 +285,23 @@ void ImprimeI(TipoApontador p, int nivel){
 void Imprime(TipoApontador p){ 
 	int  n = 0; 
 	ImprimeI(p, n); 
+} 
+
+double total;
+void SomaI(TipoApontador p, int nivel){ 
+	long i;
+	if (p == NULL) return;
+	for (i = 0; i < p->n; i++){
+		total = total + ((double)p->r[i].custo);	
+	}
+		
+	putchar('\n');
+	nivel++;
+	for (i = 0; i <= p->n; i++)
+		SomaI(p->p[i], nivel);
+} 
+
+void Soma(TipoApontador p){ 
+	int  n = 0; 
+	SomaI(p, n); 
 } 
